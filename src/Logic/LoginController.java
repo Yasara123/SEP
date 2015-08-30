@@ -19,6 +19,7 @@ public class LoginController {
     LoginDA data = new LoginDA();
     Login logs;
     Manager view;
+    Finance financial;
     Transaction record;
     
     public boolean log(String uname, String password) {
@@ -46,7 +47,9 @@ public class LoginController {
                     return true;
                 }
                 if(type.equals("Owner")){
-                    //owner interface
+                    financial = new Finance(uname);
+                    financial.setVisible(true);
+                    financial.setLocationRelativeTo(null);
                     return true;
                 }
             } else {

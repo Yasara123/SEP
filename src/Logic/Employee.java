@@ -11,7 +11,7 @@ package Logic;
  */
 public class Employee {
 
-    private String EmpID = "";
+    private int EmpID = 0;
     private String EmpType = "";
     private String Name = "";
     private String Address = "";
@@ -26,14 +26,14 @@ public class Employee {
     /**
      * @return the EmpID
      */
-    public String getEmpID() {
+    public int getEmpID() {
         return EmpID;
     }
 
     /**
      * @param EmpID the EmpID to set
      */
-    public void setEmpID(String EmpID) {
+    public void setEmpID(int EmpID) {
         this.EmpID = EmpID;
     }
 

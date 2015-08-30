@@ -8,6 +8,7 @@ package Views;
 
 import Data.LoginDA;
 import Logic.Employee;
+import Logic.FinanceController;
 import Logic.security;
 
 /**
@@ -22,7 +23,7 @@ public class EmpDetails extends javax.swing.JFrame {
     public EmpDetails() {
         initComponents();
     }
-
+    FinanceController addDetails = new FinanceController();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +51,8 @@ public class EmpDetails extends javax.swing.JFrame {
         username = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
         add = new javax.swing.JButton();
+        remove = new javax.swing.JButton();
+        close = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,13 +101,13 @@ public class EmpDetails extends javax.swing.JFrame {
                                 .addComponent(name))
                             .addComponent(type, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
                         .addGap(18, 18, 18)
-                        .addComponent(password))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(username)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(password)
+                            .addComponent(username))))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -148,6 +151,20 @@ public class EmpDetails extends javax.swing.JFrame {
             }
         });
 
+        remove.setText("Remove Employee");
+        remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeActionPerformed(evt);
+            }
+        });
+
+        close.setText("Close");
+        close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,9 +178,13 @@ public class EmpDetails extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(add)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addGap(20, 20, 20)
+                        .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(remove)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(close)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +194,10 @@ public class EmpDetails extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(add)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(add)
+                    .addComponent(remove)
+                    .addComponent(close))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
@@ -182,7 +206,7 @@ public class EmpDetails extends javax.swing.JFrame {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         // TODO add your handling code here:
-        LoginDA add = new LoginDA();
+       
         Employee emp = new Employee();
         emp.setName(name.getText());
         emp.setAge(Integer.parseInt(age.getText()));
@@ -191,17 +215,25 @@ public class EmpDetails extends javax.swing.JFrame {
         emp.setEmpType((String)type.getSelectedItem());
         String uname = username.getText();
         String pword = new String(password.getPassword());
-        String encPword = security.symmetricEncrypt(pword, Employee.getAlgo());
-        
-        try{
-            int id = add.addUser(uname, encPword);
-            add.addEmp(emp, id);
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
+        addDetails.addEmployee(uname, pword, emp);
+        name.setText("");
+        age.setText("");
+        address.setText("");
+        salary.setText("");
+        username.setText("");
+        password.setText("");
         
     }//GEN-LAST:event_addActionPerformed
+
+    private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
+        // TODO add your handling code here:
+        addDetails.loadrem();
+    }//GEN-LAST:event_removeActionPerformed
+
+    private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_closeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,6 +274,7 @@ public class EmpDetails extends javax.swing.JFrame {
     private javax.swing.JButton add;
     private javax.swing.JTextArea address;
     private javax.swing.JTextField age;
+    private javax.swing.JButton close;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -254,6 +287,7 @@ public class EmpDetails extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField name;
     private javax.swing.JPasswordField password;
+    private javax.swing.JButton remove;
     private javax.swing.JTextField salary;
     private javax.swing.JComboBox type;
     private javax.swing.JTextField username;
