@@ -171,6 +171,7 @@ public class SalaryPayment extends javax.swing.JFrame {
         manNo.setText("");
         tellPay.setText("");
         manPay.setText("");
+        total.setText("");
     }//GEN-LAST:event_recordActionPerformed
 
     /**

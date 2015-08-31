@@ -10,7 +10,7 @@ package Logic;
  *
  * @author Nandula
  */
-public class Transaction {
+public class TransactionFinance {
     
     private String type="";
     private int value=0;

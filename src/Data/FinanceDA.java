@@ -23,8 +23,8 @@ public class FinanceDA {
     private dbconnection myConnector = new dbconnection();
     private ResultSet dataSet = null;
     private List<Employee> emp = new ArrayList();
-    private List<Transaction> trans = new ArrayList();
-    private Transaction atrans;
+    private List<TransactionFinance> trans = new ArrayList();
+    private TransactionFinance atrans;
     private Employee anemp;
     private String SQLQuery = null;
 
@@ -85,7 +85,7 @@ public class FinanceDA {
         }
     }
     
-    public List<Transaction> getRecords(String date) throws SQLException {
+    public List<TransactionFinance> getRecords(String date) throws SQLException {
         try {
             trans.clear();
             databaseConnector = myConnector.makeConnection();
@@ -101,7 +101,7 @@ public class FinanceDA {
                 list = dte.split("-");
                 year = list[0];
                 if(date.equals(year)){
-                    atrans = new Transaction();
+                    atrans = new TransactionFinance();
                     atrans.setType(dataSet.getString("Type"));
                     atrans.setValue(dataSet.getInt("Value"));
                     atrans.setDate(dte);

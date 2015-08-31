@@ -3,16 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/Logic/InventoryController.java</file>
-            <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/Views/SalaryPayment.java</file>
+            <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/Logic/TransactionFinance.java</file>
             <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/Data/FinanceDA.java</file>
             <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/Logic/FinanceController.java</file>
-            <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/Logic/Transaction.java</file>
-            <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/Data/TransactionDA.java</file>
+            <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/Views/Charts.java</file>
             <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/Views/Login.java</file>
-            <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/prms/PRMS.java</file>
             <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/Logic/LoginController.java</file>
-            <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/Views/Manager.java</file>
+            <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/Views/Transaction.java</file>
             <file>file:/C:/Users/Nandula/Documents/NetBeansProjects/PRMS/src/Views/Finance.java</file>
         </group>
     </open-files>

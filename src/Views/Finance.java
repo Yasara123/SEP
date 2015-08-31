@@ -55,6 +55,11 @@ public class Finance extends javax.swing.JFrame {
         login.setText("ex");
 
         finance.setText("Financials");
+        finance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                financeActionPerformed(evt);
+            }
+        });
 
         employee.setText("Manage Employees");
         employee.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +143,11 @@ public class Finance extends javax.swing.JFrame {
         // TODO add your handling code here:
         fin.loadSalary();
     }//GEN-LAST:event_salaryActionPerformed
+
+    private void financeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_financeActionPerformed
+        // TODO add your handling code here:
+        fin.loadChartwindow();
+    }//GEN-LAST:event_financeActionPerformed
 
     /**
      * @param args the command line arguments
