@@ -30,7 +30,7 @@ public class TransactionController {
         return drugs;
     }
 
-    public void processOrder(int empid, String transaction, int total, List<Drug> update) {
+    public boolean processOrder(int empid, String transaction, int total, List<Drug> update) {
         try {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             Date date = new Date();
@@ -39,10 +39,12 @@ public class TransactionController {
             records.addFinanceRecord(total, dte, "sale");
             records.addTransaction(empid, transaction, dte, total);
             records.updateInventory(update);
+            return true;
 
         } catch (Exception e) {
             System.out.println(e);
         }
+        return false;
     }
 
 }

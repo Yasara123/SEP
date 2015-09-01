@@ -110,11 +110,12 @@ public class InventoryController {
 
     }
 
-    public void addDrugDetails(Drug adrug, supplier asup) {
+    public boolean addDrugDetails(Drug adrug, supplier asup) {
         if (asup.getId() == 0) {
             //new supplier
             try {
                 data.addDrugSupp(adrug, asup);
+                
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -122,6 +123,7 @@ public class InventoryController {
             //existing supplier
             try {
                 data.addDrug(adrug, asup.getId());
+                
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -135,10 +137,11 @@ public class InventoryController {
 
         try {
             data.addFinanceRecord(cost, dte,"purchase");
-
+            return true;
         } catch (Exception e) {
             System.out.println(e);
         }
+        return false;
     }
 
     public void LoadUpdate() {
@@ -152,16 +155,18 @@ public class InventoryController {
         update.setLocationRelativeTo(null);
     }
 
-    public void updateDetails(Drug drug, int cost) {
+    public boolean updateDetails(Drug drug, int cost) {
         try {
             data.updateDrug(drug);
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             Date date = new Date();
             String dte = dateFormat.format(date);
             data.addFinanceRecord(cost, dte,"purchase");
+            return true;
         } catch (Exception e) {
             System.out.println(e);
         }
+        return false;
     }
 
     public void LoadRemove() {
@@ -175,7 +180,7 @@ public class InventoryController {
         remove.setLocationRelativeTo(null);
     }
 
-    public void remove(Drug drug) {
+    public boolean remove(Drug drug) {
         try {
             data.removeDrug(drug.getDrugId());
             int cost = -(drug.getPrice() * drug.getQuantity());
@@ -183,8 +188,10 @@ public class InventoryController {
             Date date = new Date();
             String dte = dateFormat.format(date);
             data.addFinanceRecord(cost, dte,"removal of inventory");
+            return true;
         } catch (Exception e) {
             System.out.println(e);
         }
+        return false;
     }
 }

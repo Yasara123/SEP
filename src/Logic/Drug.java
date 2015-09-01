@@ -16,6 +16,7 @@ public class Drug {
     private int MOQ=0;
     private int quantity=0;
     private int drugId=0;
+    private int sellingPrice=0;
 
     /**
      * @return the name
@@ -85,6 +86,20 @@ public class Drug {
      */
     public void setDrugId(int drugId) {
         this.drugId = drugId;
+    }
+
+    /**
+     * @return the sellingPrice
+     */
+    public int getSellingPrice() {
+        return sellingPrice;
+    }
+
+    /**
+     * @param sellingPrice the sellingPrice to set
+     */
+    public void setSellingPrice(int sellingPrice) {
+        this.sellingPrice = sellingPrice;
     }
     
     

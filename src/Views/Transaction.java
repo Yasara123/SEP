@@ -22,7 +22,6 @@ public class Transaction extends javax.swing.JFrame {
     /**
      * Creates new form Transaction
      */
-    
     private int noOfItems = 0;
     private int empId;
     LoginController log = new LoginController();
@@ -30,58 +29,56 @@ public class Transaction extends javax.swing.JFrame {
     private List<Drug> list = new ArrayList();
     private List<Drug> updateorder = new ArrayList();
     private Drug adrug;
-    private int tot=0;
-    
-        JTextField[] drugs = new JTextField[6];
-        JTextField[] quantity = new JTextField[6];
-        JTextField[] order = new JTextField[6];
-        JTextField[] price = new JTextField[6];
-    
-    public Transaction(){
+    private int tot = 0;
+
+    JTextField[] drugs = new JTextField[6];
+    JTextField[] quantity = new JTextField[6];
+    JTextField[] order = new JTextField[6];
+    JTextField[] price = new JTextField[6];
+
+    public Transaction() {
         initComponents();
     }
-    
+
     public Transaction(String name, int id) {
         initComponents();
         login.setText("Logged in as " + name);
         this.empId = id;
         list = trans.loadDrugs();
-        
-        for(int i=0;i<list.size();i++){
+
+        for (int i = 0; i < list.size(); i++) {
             drugList.addItem(list.get(i).getName());
         }
-        
+
         drugs[0] = d1;
         drugs[1] = d2;
         drugs[2] = d3;
         drugs[3] = d4;
         drugs[4] = d5;
         drugs[5] = d6;
-        
+
         quantity[0] = a1;
         quantity[1] = a2;
         quantity[2] = a3;
         quantity[3] = a4;
         quantity[4] = a5;
         quantity[5] = a6;
-        
+
         order[0] = o1;
         order[1] = o2;
         order[2] = o3;
         order[3] = o4;
         order[4] = o5;
         order[5] = o6;
-        
+
         price[0] = u1;
         price[1] = u2;
         price[2] = u3;
         price[3] = u4;
         price[4] = u5;
         price[5] = u6;
-        
-    }
 
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -305,6 +302,8 @@ public class Transaction extends javax.swing.JFrame {
                 .addGap(23, 23, 23))
         );
 
+        total.setEditable(false);
+
         jLabel7.setText("Total");
 
         process.setText("Process Order");
@@ -403,101 +402,108 @@ public class Transaction extends javax.swing.JFrame {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         // TODO add your handling code here:
-        String name = (String)drugList.getSelectedItem();
+        String name = (String) drugList.getSelectedItem();
         noOfItems++;
-        for(int i=0;i<list.size();i++){
-            if(list.get(i).getName().equals(name)){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getName().equals(name)) {
                 adrug = list.get(i);
                 break;
+            }
         }
-        }
-        
-        drugs[(noOfItems-1)].setText(adrug.getName());
-        quantity[(noOfItems-1)].setText(Integer.toString(adrug.getQuantity()));
-        price[(noOfItems-1)].setText(Integer.toString(adrug.getPrice()));
-        
+
+        drugs[(noOfItems - 1)].setText(adrug.getName());
+        quantity[(noOfItems - 1)].setText(Integer.toString(adrug.getQuantity()));
+        price[(noOfItems - 1)].setText(Integer.toString(adrug.getSellingPrice()));
+
     }//GEN-LAST:event_addActionPerformed
 
     private void add1(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add1
         // TODO add your handling code here:
-        int value = Integer.parseInt(order[noOfItems-1].getText());
-        int sum = Integer.parseInt(price[noOfItems-1].getText())*value;
+        int value = Integer.parseInt(order[noOfItems - 1].getText());
+        int sum = Integer.parseInt(price[noOfItems - 1].getText()) * value;
         tot = tot + sum;
         total.setText(Integer.toString(tot));
-        adrug.setQuantity(adrug.getQuantity()-value);
+        adrug.setQuantity(adrug.getQuantity() - value);
         updateorder.add(adrug);
     }//GEN-LAST:event_add1
 
     private void add2(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add2
         // TODO add your handling code here:
-        int value = Integer.parseInt(order[noOfItems-1].getText());
-        int sum = Integer.parseInt(price[noOfItems-1].getText())*value;
+        int value = Integer.parseInt(order[noOfItems - 1].getText());
+        int sum = Integer.parseInt(price[noOfItems - 1].getText()) * value;
         tot = tot + sum;
         total.setText(Integer.toString(tot));
-        adrug.setQuantity(adrug.getQuantity()-value);
+        adrug.setQuantity(adrug.getQuantity() - value);
         updateorder.add(adrug);
     }//GEN-LAST:event_add2
 
     private void add3(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add3
         // TODO add your handling code here:
-        int value = Integer.parseInt(order[noOfItems-1].getText());
-        int sum = Integer.parseInt(price[noOfItems-1].getText())*value;
+        int value = Integer.parseInt(order[noOfItems - 1].getText());
+        int sum = Integer.parseInt(price[noOfItems - 1].getText()) * value;
         tot = tot + sum;
         total.setText(Integer.toString(tot));
-        adrug.setQuantity(adrug.getQuantity()-value);
+        adrug.setQuantity(adrug.getQuantity() - value);
         updateorder.add(adrug);
     }//GEN-LAST:event_add3
 
     private void add4(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add4
         // TODO add your handling code here:
-        int value = Integer.parseInt(order[noOfItems-1].getText());
-        int sum = Integer.parseInt(price[noOfItems-1].getText())*value;
+        int value = Integer.parseInt(order[noOfItems - 1].getText());
+        int sum = Integer.parseInt(price[noOfItems - 1].getText()) * value;
         tot = tot + sum;
         total.setText(Integer.toString(tot));
-        adrug.setQuantity(adrug.getQuantity()-value);
+        adrug.setQuantity(adrug.getQuantity() - value);
         updateorder.add(adrug);
     }//GEN-LAST:event_add4
 
     private void add5(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add5
         // TODO add your handling code here:
-        int value = Integer.parseInt(order[noOfItems-1].getText());
-        int sum = Integer.parseInt(price[noOfItems-1].getText())*value;
+        int value = Integer.parseInt(order[noOfItems - 1].getText());
+        int sum = Integer.parseInt(price[noOfItems - 1].getText()) * value;
         tot = tot + sum;
         total.setText(Integer.toString(tot));
-        adrug.setQuantity(adrug.getQuantity()-value);
+        adrug.setQuantity(adrug.getQuantity() - value);
         updateorder.add(adrug);
     }//GEN-LAST:event_add5
 
     private void add6(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add6
         // TODO add your handling code here:
-        int value = Integer.parseInt(order[noOfItems-1].getText());
-        int sum = Integer.parseInt(price[noOfItems-1].getText())*value;
+        int value = Integer.parseInt(order[noOfItems - 1].getText());
+        int sum = Integer.parseInt(price[noOfItems - 1].getText()) * value;
         tot = tot + sum;
         total.setText(Integer.toString(tot));
-        adrug.setQuantity(adrug.getQuantity()-value);
+        adrug.setQuantity(adrug.getQuantity() - value);
         updateorder.add(adrug);
     }//GEN-LAST:event_add6
 
     private void processActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processActionPerformed
         // TODO add your handling code here:
-        if(noOfItems==0){
+        if (noOfItems == 0) {
             JOptionPane.showMessageDialog(rootPane, "Please Enter Data to continue", "Data Entry error", JOptionPane.ERROR_MESSAGE);
-            
-        }else{
-        String record = "";
-         for(int i =0; i<noOfItems;i++){
-             record = record + drugs[i].getText() + " units " + order[i].getText() +"\n";
-         }
-         //System.out.println(record);
-         trans.processOrder(empId, record, tot, updateorder);
-         for(int i =0; i<noOfItems;i++){
-             drugs[i].setText("");
-             quantity[i].setText("");
-             order[i].setText("");
-             price[i].setText("");
-         }
-         noOfItems=0;
-         updateorder.clear();
+
+        } else {
+            String record = "";
+            for (int i = 0; i < noOfItems; i++) {
+                record = record + drugs[i].getText() + " units " + order[i].getText() + "\n";
+            }
+            //System.out.println(record);
+            boolean transaction = trans.processOrder(empId, record, tot, updateorder);
+            if (transaction) {
+                for (int i = 0; i < noOfItems; i++) {
+                    drugs[i].setText("");
+                    quantity[i].setText("");
+                    order[i].setText("");
+                    price[i].setText("");
+                }
+                noOfItems = 0;
+                updateorder.clear();
+                total.setText("");
+                JOptionPane.showMessageDialog(rootPane, "Successfully Added", "Transaction Addition", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Could Not Add record", "Transaction Addition", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
     }//GEN-LAST:event_processActionPerformed
 

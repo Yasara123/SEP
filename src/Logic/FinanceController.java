@@ -44,14 +44,16 @@ public class FinanceController {
     private List<Employee> tempEmp = new ArrayList();
     private List<TransactionFinance> temptrans = new ArrayList();
 
-    public void addEmployee(String uname, String pword, Employee emp) {
+    public boolean addEmployee(String uname, String pword, Employee emp) {
         String encpword = security.symmetricEncrypt(pword, Employee.getAlgo());
         try {
             int id = add.addUser(uname, encpword);
             add.addEmp(emp, id);
+            return true;
         } catch (Exception e) {
             System.out.println(e);
         }
+        return false;
     }
 
     public void loadEmp() {
@@ -77,12 +79,14 @@ public class FinanceController {
 
     }
 
-    public void removeEmp(int id) {
+    public boolean removeEmp(int id) {
         try {
             finance.removeEmployee(id);
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(FinanceController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
     }
 
     public void loadSalary() {
@@ -122,15 +126,17 @@ public class FinanceController {
         return values;
     }
 
-    public void recordPayment(int total) {
+    public boolean recordPayment(int total) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         String dte = dateFormat.format(date);
         try {
             finance.addFinanceRecord(total, dte, "salary");
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(FinanceController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
     }
 
     public int[] getFinacialRecords(String date) {

@@ -43,6 +43,7 @@ public class TransactionDA {
                 adrug.setPrice(dataSet.getInt("UnitPrice"));
                 adrug.setQuantity(dataSet.getInt("QuantityAvailable"));
                 adrug.setMOQ(dataSet.getInt("MOQ"));
+                adrug.setSellingPrice(dataSet.getInt("SellingPrice"));
                 drugs.add(adrug);
             }
 

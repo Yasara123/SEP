@@ -7,6 +7,7 @@
 package Views;
 
 import Logic.FinanceController;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,6 +30,7 @@ public class SalaryPayment extends javax.swing.JFrame {
         tellPay.setText(Integer.toString(values[1]));
         manPay.setText(Integer.toString(values[3]));
         total.setText(Integer.toString((values[1]+values[3])));
+        total.setEditable(false);
     }
 
     /**
@@ -166,12 +168,19 @@ public class SalaryPayment extends javax.swing.JFrame {
         // TODO add your handling code here:
         int tot = Integer.parseInt(total.getText());
         tot = -(tot);
-        pay.recordPayment(tot);
+        boolean paid =pay.recordPayment(tot);
         tellNo.setText("");
         manNo.setText("");
         tellPay.setText("");
         manPay.setText("");
         total.setText("");
+        
+        if(paid){
+            JOptionPane.showMessageDialog(rootPane, "Salary Payments Recorded", "Transactions", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Could not record transaction", "Transaction error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_recordActionPerformed
 
     /**

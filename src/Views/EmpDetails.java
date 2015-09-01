@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Views;
 
 import Data.LoginDA;
 import Logic.Employee;
 import Logic.FinanceController;
 import Logic.security;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +24,7 @@ public class EmpDetails extends javax.swing.JFrame {
         initComponents();
     }
     FinanceController addDetails = new FinanceController();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -206,23 +207,30 @@ public class EmpDetails extends javax.swing.JFrame {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         // TODO add your handling code here:
-       
+
         Employee emp = new Employee();
         emp.setName(name.getText());
         emp.setAge(Integer.parseInt(age.getText()));
         emp.setAddress(address.getText());
         emp.setSalary(Integer.parseInt(salary.getText()));
-        emp.setEmpType((String)type.getSelectedItem());
+        emp.setEmpType((String) type.getSelectedItem());
         String uname = username.getText();
         String pword = new String(password.getPassword());
-        addDetails.addEmployee(uname, pword, emp);
-        name.setText("");
-        age.setText("");
-        address.setText("");
-        salary.setText("");
-        username.setText("");
-        password.setText("");
-        
+        boolean added = addDetails.addEmployee(uname, pword, emp);
+        if (added) {
+            name.setText("");
+            age.setText("");
+            address.setText("");
+            salary.setText("");
+            username.setText("");
+            password.setText("");
+            JOptionPane.showMessageDialog(rootPane, "Employee Addes", "Addition", JOptionPane.INFORMATION_MESSAGE);
+            //selected = false;
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Could not add employee", "Record error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_addActionPerformed
 
     private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed

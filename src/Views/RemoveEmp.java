@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Views;
 
 import Logic.Employee;
 import Logic.FinanceController;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,24 +19,25 @@ public class RemoveEmp extends javax.swing.JFrame {
     /**
      * Creates new form RemoveEmp
      */
-    
     List<Employee> employee;
     Employee emp;
     FinanceController fin = new FinanceController();
-    
+    boolean selected = false;
+
     public RemoveEmp() {
         initComponents();
     }
+
     public RemoveEmp(List<Employee> emp) {
         initComponents();
-        this.employee=emp;
-        for(int i =0;i<emp.size();i++){
-            if(emp.get(i).getEmpType().equals("Owner")){
+        this.employee = emp;
+        for (int i = 0; i < emp.size(); i++) {
+            if (emp.get(i).getEmpType().equals("Owner")) {
                 continue;
             }
             emplist.addItem(emp.get(i).getName());
         }
-        
+
     }
 
     /**
@@ -167,17 +168,18 @@ public class RemoveEmp extends javax.swing.JFrame {
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
         // TODO add your handling code here:
-        String nme = (String)emplist.getSelectedItem();
-        for(int i =0;i<employee.size();i++){
-            if(employee.get(i).getName().equals(nme)){
+        String nme = (String) emplist.getSelectedItem();
+        for (int i = 0; i < employee.size(); i++) {
+            if (employee.get(i).getName().equals(nme)) {
                 emp = employee.get(i);
                 break;
-            }   
+            }
         }
-        
+
         id.setText(Integer.toString(emp.getEmpID()));
         name.setText(emp.getName());
         type.setText(emp.getEmpType());
+        selected = true;
     }//GEN-LAST:event_selectActionPerformed
 
     private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
@@ -187,11 +189,23 @@ public class RemoveEmp extends javax.swing.JFrame {
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
-        int ID = Integer.parseInt(id.getText());
-        fin.removeEmp(ID);
-        id.setText("");
-        name.setText("");
-        type.setText("");
+        if (selected) {
+            int ID = Integer.parseInt(id.getText());
+            boolean remove = fin.removeEmp(ID);
+
+            if (remove) {
+                id.setText("");
+                name.setText("");
+                type.setText("");
+                JOptionPane.showMessageDialog(rootPane, "Employee Removed", "Removal", JOptionPane.INFORMATION_MESSAGE);
+                selected = false;
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Could not remove employee", "Removal error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Select an Employee", "Removal error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_deleteActionPerformed
 
     /**

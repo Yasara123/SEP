@@ -10,6 +10,7 @@ import Logic.Drug;
 import Logic.InventoryController;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -176,8 +177,14 @@ public class UpdateDrug extends javax.swing.JFrame {
         int amount = Integer.parseInt(additional.getText());
         current.setQuantity((amount+current.getQuantity()));
         int cost = -(amount*current.getPrice());
-        updte.updateDetails(current, cost);
+        boolean update=updte.updateDetails(current, cost);
         
+         if(update){
+            JOptionPane.showMessageDialog(rootPane,"Successfully Added", "Drug Addition", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane,"Could Not Add record", "Drug Addition", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_updateActionPerformed
 
     /**

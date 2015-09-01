@@ -46,6 +46,7 @@ public class InventoryDA {
                 adrug.setPrice(dataSet.getInt("UnitPrice"));
                 adrug.setQuantity(dataSet.getInt("QuantityAvailable"));
                 adrug.setMOQ(dataSet.getInt("MOQ"));
+                adrug.setSellingPrice(dataSet.getInt("SellingPrice"));
                 drugs.add(adrug);
             }
 
@@ -145,13 +146,14 @@ public class InventoryDA {
                 id = dataSet.getInt("suppId");
             }
             //add drug
-            SQLQuery = "INSERT INTO drug (Name,QuantityAvailable,UnitPrice,MOQ,suppId)" + "VALUES(?,?,?,?,?)";
+            SQLQuery = "INSERT INTO drug (Name,QuantityAvailable,UnitPrice,SellingPrice,MOQ,suppId)" + "VALUES(?,?,?,?,?,?)";
             PreparedStatement statement = databaseConnector.prepareStatement(SQLQuery);
             statement.setString(1, drug.getName());
             statement.setInt(2, drug.getQuantity());
             statement.setInt(3, drug.getPrice());
-            statement.setInt(4, drug.getMOQ());
-            statement.setInt(5, id);
+            statement.setInt(4, drug.getSellingPrice());
+            statement.setInt(5, drug.getMOQ());
+            statement.setInt(6, id);
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -163,13 +165,14 @@ public class InventoryDA {
     public void addDrug(Drug drug, int id) throws SQLException {
         try {
             databaseConnector = myConnector.makeConnection();
-            SQLQuery = "INSERT INTO drug (Name,QuantityAvailable,UnitPrice,MOQ,suppId)" + "VALUES(?,?,?,?,?)";
+            SQLQuery = "INSERT INTO drug (Name,QuantityAvailable,UnitPrice,SellingPrice,MOQ,suppId)" + "VALUES(?,?,?,?,?,?)";
             PreparedStatement statement = databaseConnector.prepareStatement(SQLQuery);
             statement.setString(1, drug.getName());
             statement.setInt(2, drug.getQuantity());
             statement.setInt(3, drug.getPrice());
-            statement.setInt(4, drug.getMOQ());
-            statement.setInt(5, id);
+            statement.setInt(4, drug.getSellingPrice());
+            statement.setInt(5, drug.getMOQ());
+            statement.setInt(6, id);
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);

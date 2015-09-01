@@ -10,6 +10,7 @@ import Logic.Drug;
 import Logic.InventoryController;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,8 +32,8 @@ public class RemoveDrug extends javax.swing.JFrame {
     public RemoveDrug(List<Drug> drug) {
         initComponents();
         temp = drug;
-        for(int i=0;i<temp.size();i++){
-            current=temp.get(i);
+        for (int i = 0; i < temp.size(); i++) {
+            current = temp.get(i);
             list.addItem(current.getName());
         }
     }
@@ -141,10 +142,10 @@ public class RemoveDrug extends javax.swing.JFrame {
 
     private void showActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showActionPerformed
         // TODO add your handling code here:
-        String name = (String)list.getSelectedItem();
-        for(int i=0;i<temp.size();i++){
-            current=temp.get(i);
-            if(name.equals(current.getName())){
+        String name = (String) list.getSelectedItem();
+        for (int i = 0; i < temp.size(); i++) {
+            current = temp.get(i);
+            if (name.equals(current.getName())) {
                 price.setText(Integer.toString(current.getPrice()));
                 quantity.setText(Integer.toString(current.getQuantity()));
                 break;
@@ -155,7 +156,14 @@ public class RemoveDrug extends javax.swing.JFrame {
 
     private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
         // TODO add your handling code here:
-        rmv.remove(current);
+        boolean rem = rmv.remove(current);
+        if (rem) {
+            price.setText("");
+            quantity.setText("");
+            JOptionPane.showMessageDialog(rootPane, "Successfully removed", "Drug Removal", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Could Not remove record", "Drug Removal", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_removeActionPerformed
 
     private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
