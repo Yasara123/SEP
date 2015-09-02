@@ -43,6 +43,7 @@ public class FinanceController {
     Charts chrt;
     private List<Employee> tempEmp = new ArrayList();
     private List<TransactionFinance> temptrans = new ArrayList();
+    private List<String> tempyr = new ArrayList();
 
     public boolean addEmployee(String uname, String pword, Employee emp) {
         String encpword = security.symmetricEncrypt(pword, Employee.getAlgo());
@@ -97,7 +98,8 @@ public class FinanceController {
     }
     
     public void loadChartwindow(){
-        chrt = new Charts();
+        yearList();
+        chrt = new Charts(tempyr);
         chrt.setVisible(true);
         chrt.setLocationRelativeTo(null);
     }
@@ -219,6 +221,46 @@ public class FinanceController {
         frame.setVisible(true);
         frame.setLocation(500,0);
         frame.setSize(400, 400);
+    }
+    
+    public void drawYearlyChart(String olddate,String newdate){
+        int[] valuesOld;
+        int[] valuesnew;
+        valuesOld = getFinacialRecords(olddate);
+        valuesnew = getFinacialRecords(newdate);
+        int oldcost = -(valuesOld[1]+valuesOld[2]+valuesOld[3]);
+        int oldprofit = valuesOld[0]-oldcost;
+        
+        int newcost = -(valuesnew[1]+valuesnew[2]+valuesnew[3]);
+        int newprofit = valuesnew[0]-newcost;
+        
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        data.setValue(valuesOld[0], olddate, "Sales");
+        data.setValue(oldcost, olddate, "Cost");
+        data.setValue(oldprofit, olddate, "Profit");
+        
+        data.setValue(valuesnew[0], newdate, "Sales");
+        data.setValue(newcost, newdate, "Cost");
+        data.setValue(newprofit, newdate, "Profit");
+        
+        JFreeChart chart = ChartFactory.createBarChart3D("Profit Analysis", "Years", "Values in Rupees", data, PlotOrientation.VERTICAL, true, true, false);
+        
+        CategoryPlot p = chart.getCategoryPlot();
+        p.setRangeGridlinePaint(Color.MAGENTA);
+        ChartFrame frame = new ChartFrame("Testing", chart);
+        frame.setVisible(true);
+        frame.setLocation(910,0);
+        frame.setSize(400, 400);
+    }
+    
+    public void yearList(){
+        try{
+            tempyr.clear();
+            tempyr = finance.getYears();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
     }
 
 }

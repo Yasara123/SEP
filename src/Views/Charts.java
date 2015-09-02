@@ -7,6 +7,7 @@
 package Views;
 
 import Logic.FinanceController;
+import java.util.List;
 
 /**
  *
@@ -19,6 +20,13 @@ public class Charts extends javax.swing.JFrame {
      */
     public Charts() {
         initComponents();
+    }
+    
+    public Charts(List<String> years) {
+        initComponents();
+        for(int i=0;i<years.size();i++){
+            date.addItem(years.get(i));
+        }
     }
     FinanceController charting = new FinanceController();
     /**
@@ -36,8 +44,6 @@ public class Charts extends javax.swing.JFrame {
         close = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        date.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
 
         view.setText("View Charts");
         view.addActionListener(new java.awt.event.ActionListener() {
@@ -97,8 +103,12 @@ public class Charts extends javax.swing.JFrame {
     private void viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewActionPerformed
         // TODO add your handling code here:
         String dte = (String)date.getSelectedItem();
+        int current = Integer.parseInt(dte);
+        int old = current-1;
+        String oldDate= Integer.toString(old);
         charting.drawCostPieChart(dte);
         charting.drawProfitChart(dte);
+        charting.drawYearlyChart(oldDate, dte);
     }//GEN-LAST:event_viewActionPerformed
 
     /**

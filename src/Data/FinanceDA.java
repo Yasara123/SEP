@@ -27,6 +27,7 @@ public class FinanceDA {
     private TransactionFinance atrans;
     private Employee anemp;
     private String SQLQuery = null;
+    private List<String> years = new ArrayList<String>();
 
     public List<Employee> getDetails() throws SQLException {
         try {
@@ -84,7 +85,7 @@ public class FinanceDA {
             System.out.println(e);
         }
     }
-    
+
     public List<TransactionFinance> getRecords(String date) throws SQLException {
         try {
             trans.clear();
@@ -100,20 +101,40 @@ public class FinanceDA {
                 dte = dataSet.getString("date");
                 list = dte.split("-");
                 year = list[0];
-                if(date.equals(year)){
+                if (date.equals(year)) {
                     atrans = new TransactionFinance();
                     atrans.setType(dataSet.getString("Type"));
                     atrans.setValue(dataSet.getInt("Value"));
                     atrans.setDate(dte);
                     trans.add(atrans);
                 }
-                
+
             }
 
         } catch (SQLException e) {
             System.out.println(e);
         }
         return trans;
+    }
+
+    public List<String> getYears() throws SQLException {
+        try {
+            years.clear();
+            databaseConnector = myConnector.makeConnection();
+
+            SQLQuery = "SELECT distinct year(date) as Year FROM finance";
+            PreparedStatement preparedStatement = databaseConnector.prepareStatement(SQLQuery);
+            dataSet = preparedStatement.executeQuery();
+            String dte;
+            while (dataSet.next()) {
+                dte = dataSet.getString("Year");
+                years.add(dte);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return years;
     }
 
 }
