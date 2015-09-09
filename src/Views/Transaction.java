@@ -81,6 +81,7 @@ public class Transaction extends javax.swing.JFrame {
         transTable = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         quan = new javax.swing.JTextField();
+        remove = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,6 +134,13 @@ public class Transaction extends javax.swing.JFrame {
 
         quan.setText("1");
 
+        remove.setText("Remove Last Record");
+        remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,24 +161,28 @@ public class Transaction extends javax.swing.JFrame {
                                 .addGap(50, 50, 50)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(quan, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(quan, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(31, 31, 31))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(logout))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(16, 16, 16)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(login)
-                                    .addComponent(process))))))
-                .addGap(31, 31, 31))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(19, 19, 19)
+                                        .addComponent(jLabel7)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(login))
+                                .addGap(0, 11, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(process, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(remove, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(logout, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,15 +199,17 @@ public class Transaction extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(quan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(51, 51, 51)
-                        .addComponent(logout)
-                        .addGap(28, 28, 28)
-                        .addComponent(process))
+                        .addGap(35, 35, 35)
+                        .addComponent(remove)
+                        .addGap(18, 18, 18)
+                        .addComponent(process)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logout))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
@@ -223,7 +237,13 @@ public class Transaction extends javax.swing.JFrame {
         fieldValues[0] = adrug.getName();
         fieldValues[1] = adrug.getQuantity();
         fieldValues[3] = adrug.getSellingPrice();
-        fieldValues[2] = Integer.parseInt(quan.getText());
+        if(adrug.getQuantity()>Integer.parseInt(quan.getText())){
+            fieldValues[2] = Integer.parseInt(quan.getText());
+        }
+        else{
+            fieldValues[2] = adrug.getQuantity();
+        }
+        
         transactionmd.addRow(fieldValues);
         this.transTable.setModel(transactionmd);
         int value = Integer.parseInt(quan.getText());
@@ -266,6 +286,14 @@ public class Transaction extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_processActionPerformed
+
+    private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel rem = (DefaultTableModel) transTable.getModel();
+        noOfItems--;
+        rem.removeRow(noOfItems);
+        this.transTable.setModel(rem);
+    }//GEN-LAST:event_removeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,6 +342,7 @@ public class Transaction extends javax.swing.JFrame {
     private javax.swing.JButton logout;
     private javax.swing.JButton process;
     private javax.swing.JTextField quan;
+    private javax.swing.JButton remove;
     private javax.swing.JTextField total;
     private javax.swing.JTable transTable;
     // End of variables declaration//GEN-END:variables

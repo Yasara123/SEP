@@ -35,8 +35,8 @@ import org.jfree.data.general.DefaultPieDataset;
  */
 public class FinanceController {
 
-    LoginDA add = new LoginDA();
-    FinanceDA finance = new FinanceDA();
+    LoginDA add = LoginDA.getInstance();
+    FinanceDA finance = FinanceDA.getInstance();
     EmpDetails addemp;
     RemoveEmp rem;
     SalaryPayment pay;
@@ -198,7 +198,7 @@ public class FinanceController {
         PiePlot3D p = (PiePlot3D)chart.getPlot();
         ChartFrame frame = new ChartFrame("Costs", chart);
         frame.setVisible(true);
-        frame.setLocation(0, 0);
+        frame.setLocation(100, 100);
         frame.setSize(400, 400);
     }
     
@@ -219,7 +219,7 @@ public class FinanceController {
         p.setRangeGridlinePaint(Color.MAGENTA);
         ChartFrame frame = new ChartFrame("Testing", chart);
         frame.setVisible(true);
-        frame.setLocation(500,0);
+        frame.setLocation(500,100);
         frame.setSize(400, 400);
     }
     
@@ -249,7 +249,7 @@ public class FinanceController {
         p.setRangeGridlinePaint(Color.MAGENTA);
         ChartFrame frame = new ChartFrame("Testing", chart);
         frame.setVisible(true);
-        frame.setLocation(910,0);
+        frame.setLocation(910,100);
         frame.setSize(400, 400);
     }
     

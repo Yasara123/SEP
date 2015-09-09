@@ -28,6 +28,18 @@ public class FinanceDA {
     private Employee anemp;
     private String SQLQuery = null;
     private List<String> years = new ArrayList<String>();
+    public static FinanceDA finc;
+    
+    private FinanceDA(){
+        
+    }
+    
+    public static FinanceDA getInstance(){
+        if(finc==null){
+            finc=new FinanceDA();
+        }
+        return finc;
+    }
 
     public List<Employee> getDetails() throws SQLException {
         try {

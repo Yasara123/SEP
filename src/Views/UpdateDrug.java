@@ -79,6 +79,10 @@ public class UpdateDrug extends javax.swing.JFrame {
 
         jLabel4.setText("Amount to be added");
 
+        quantity.setEditable(false);
+
+        price.setEditable(false);
+
         update.setText("Update");
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

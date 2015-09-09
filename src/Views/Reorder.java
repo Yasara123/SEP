@@ -70,6 +70,11 @@ public class Reorder extends javax.swing.JFrame {
 
         jLabel5.setText("Drug Name");
 
+        name.setEditable(false);
+
+        telephone.setEditable(false);
+
+        drug.setEditable(false);
         drug.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 drugActionPerformed(evt);

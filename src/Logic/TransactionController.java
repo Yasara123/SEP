@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class TransactionController {
 
-    private TransactionDA records = new TransactionDA();
+    private TransactionDA records = TransactionDA.getInstance();
     private List<Drug> drugs;
 
     public List<Drug> loadDrugs() {

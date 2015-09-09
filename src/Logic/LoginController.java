@@ -16,7 +16,7 @@ import Views.*;
  */
 public class LoginController {
 
-    LoginDA data = new LoginDA();
+    LoginDA data = LoginDA.getInstance();
     Login logs;
     Manager view;
     Finance financial;

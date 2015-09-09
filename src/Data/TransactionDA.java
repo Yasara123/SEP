@@ -25,6 +25,18 @@ public class TransactionDA {
     private List<Drug> drugs = new ArrayList();
     private Drug adrug;
     private String SQLQuery = null;
+    public static TransactionDA trans;
+    
+    private TransactionDA(){
+        
+    }
+    
+    public static TransactionDA getInstance(){
+        if(trans==null){
+            trans = new TransactionDA();
+        }
+        return trans;
+    }
 
     public List<Drug> getDrugs() throws SQLException {
 

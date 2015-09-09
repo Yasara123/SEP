@@ -21,7 +21,7 @@ import org.smslib.modem.SerialModemGateway;
 public class SMS {
     
     public static void sendMessage(String number, String message) throws GatewayException, SMSLibException, TimeoutException, IOException, InterruptedException {
-        SerialModemGateway gateway = new SerialModemGateway("modem.com3", "COM11", 9600, "", "");
+        SerialModemGateway gateway = new SerialModemGateway("modem.com3", "COM15", 9600, "", "");
         gateway.setInbound(true);
         gateway.setOutbound(true);
         Service.getInstance().addGateway(gateway);

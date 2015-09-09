@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.smslib.SMSLibException;
 
 /**
@@ -33,7 +34,7 @@ public class InventoryController {
     private AddDrug drug;
     private UpdateDrug update;
     private RemoveDrug remove;
-    private InventoryDA data = new InventoryDA();
+    private InventoryDA data = InventoryDA.getInstance();
     private List<Drug> invtempDrug;
     private List<Drug> tempDrug;
     private List<supplier> tempsup;
@@ -84,10 +85,16 @@ public class InventoryController {
             sent = true;
         } catch (SMSLibException ex) {
             Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
+            //JOptionPane.showMessageDialog(order,ex, "Message Details", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println(ex);
         } catch (IOException ex) {
-            Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
+            //JOptionPane.showMessageDialog(order,ex, "Message Details", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("ex");
         } catch (InterruptedException ex) {
             Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
+            //JOptionPane.showMessageDialog(order,ex, "Message Details", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println(ex);
         }
 
         try {

@@ -23,6 +23,18 @@ public class LoginDA {
     String details[]=new String[2];
     String type;
     private String SQLQuery = null;
+    public static LoginDA login;
+    
+    private LoginDA(){
+        
+    }
+    
+    public static LoginDA getInstance(){
+        if(login==null){
+            login = new LoginDA();
+        }
+        return login;
+    }
 
     public String[] getPassword(String username) throws SQLException {
         try {

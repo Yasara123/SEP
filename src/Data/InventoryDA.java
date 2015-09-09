@@ -28,6 +28,18 @@ public class InventoryDA {
     private Drug adrug;
     private String SQLQuery = null;
     private supplier asup;
+    public static InventoryDA inv;
+    
+    private InventoryDA(){
+        
+    }
+    
+    public static InventoryDA getInstance(){
+        if(inv==null){
+            inv=new InventoryDA();
+        }
+        return inv;
+    }
 
     public List<Drug> getDrugs() throws SQLException {
 
